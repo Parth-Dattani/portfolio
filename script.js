@@ -269,8 +269,66 @@
   const resumeBtn = document.getElementById('resumeBtn');
   if (resumeBtn) {
     resumeBtn.addEventListener('click', function () {
-      showToast('Opening Parth Dattani\'s Official Resume on Google Drive...');
+      showToast('Opening Technical Portfolio / Deck on Google Drive...');
     });
+  }
+
+  // --- Hero Console Tab Switcher (Agency Showcase) ---
+  const consoleTabBtns = document.querySelectorAll('.console-tab-btn');
+  const consoleTabContents = document.querySelectorAll('.console-tab-content');
+
+  if (consoleTabBtns.length > 0 && consoleTabContents.length > 0) {
+    consoleTabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        consoleTabBtns.forEach(function (b) { b.classList.remove('active'); });
+        consoleTabContents.forEach(function (c) { c.style.display = 'none'; });
+
+        this.classList.add('active');
+        const targetId = this.getAttribute('data-tab');
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.style.display = 'flex';
+        }
+      });
+    });
+  }
+
+  // --- FAQ Accordion Interactive Toggles ---
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  if (faqQuestions.length > 0) {
+    faqQuestions.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const parentItem = this.closest('.faq-item');
+        if (!parentItem) return;
+        
+        const wasActive = parentItem.classList.contains('active');
+        // Close all items
+        document.querySelectorAll('.faq-item').forEach(function (item) {
+          item.classList.remove('active');
+        });
+
+        // Toggle clicked
+        if (!wasActive) {
+          parentItem.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // --- Live Telemetry Simulation (Smooth Subtle Heartbeat) ---
+  const fpsEl = document.getElementById('telemetryFps');
+  const latencyEl = document.getElementById('telemetryLatency');
+  if (fpsEl || latencyEl) {
+    setInterval(function () {
+      if (fpsEl) {
+        const fps = (59.7 + Math.random() * 0.3).toFixed(1);
+        fpsEl.textContent = fps + ' FPS';
+      }
+      if (latencyEl) {
+        const latency = Math.floor(10 + Math.random() * 5);
+        latencyEl.textContent = latency + 'ms';
+      }
+    }, 2400);
   }
 
   // --- Smooth Scroll For All Anchor Links ---
@@ -287,3 +345,4 @@
   });
 
 })();
+
