@@ -1592,6 +1592,16 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
   }
   
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+  }
+}
+
 /* --- Netlify Injected Badge Override --- */
 [class*="netlify-badge"],
 [id*="netlify-badge"],
@@ -1602,7 +1612,6 @@ h1, h2, h3, h4, h5, h6 {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-
 
 @media (max-width: 480px) {
   .stats-grid {
