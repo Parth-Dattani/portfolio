@@ -265,15 +265,11 @@
     });
   }
 
-  // --- Resume Button Handler ---
+  // --- Resume Button Toast Feedback ---
   const resumeBtn = document.getElementById('resumeBtn');
   if (resumeBtn) {
-    resumeBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      showToast('Opening Parth Dattani\'s Profile / Resume details.');
-      setTimeout(function () {
-        window.location.href = 'mailto:dattaniparth2@gmail.com?subject=Request%20Resume%20-%20Parth%20Dattani';
-      }, 800);
+    resumeBtn.addEventListener('click', function () {
+      showToast('Opening Parth Dattani\'s Official Resume on Google Drive...');
     });
   }
 
