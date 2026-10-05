@@ -273,9 +273,48 @@
     });
   }
 
-  // --- Hero Console Tab Switcher (Agency Showcase) ---
+  // --- Hero Console Tab Switcher & Dynamic Telemetry (Agency Showcase) ---
   const consoleTabBtns = document.querySelectorAll('.console-tab-btn');
   const consoleTabContents = document.querySelectorAll('.console-tab-content');
+  
+  const telemetryLabel1 = document.getElementById('telemetryLabel1');
+  const telemetryLabel2 = document.getElementById('telemetryLabel2');
+  const telemetryLabel3 = document.getElementById('telemetryLabel3');
+  const telemetryLabel4 = document.getElementById('telemetryLabel4');
+  
+  const fpsEl = document.getElementById('telemetryFps');
+  const latencyEl = document.getElementById('telemetryLatency');
+  const gpsEl = document.getElementById('telemetryGps');
+  const ramEl = document.getElementById('telemetryRam');
+
+  let activeTabKey = 'tab-furlink';
+
+  const tabMetricsMap = {
+    'tab-furlink': {
+      label1: 'Render Engine', val1: '60.0 FPS',
+      label2: 'BLE / MQTT Latency', val2: '12ms',
+      label3: 'GPS Geofence', val3: '< 3.8m Lock',
+      label4: 'Heap Memory', val4: '< 39MB Peak'
+    },
+    'tab-erp': {
+      label1: 'Render Engine', val1: '60.0 FPS',
+      label2: 'MySQL Sync Latency', val2: '35ms',
+      label3: 'Active Modules', val3: '20+ Modules',
+      label4: 'Driver GPS Tracking', val4: 'Live Stream'
+    },
+    'tab-gst': {
+      label1: 'Render Engine', val1: '60.0 FPS',
+      label2: 'PDF Generation', val2: '< 1.4s',
+      label3: 'Cloud Sync Engine', val3: 'Google Sheets',
+      label4: 'Billing Turnaround', val4: '-40% Time'
+    },
+    'tab-ecom': {
+      label1: 'Performance Score', val1: '98/100',
+      label2: 'Server TTFB', val2: '140ms',
+      label3: 'Order Dispatch', val3: 'WhatsApp Bot',
+      label4: 'Payment Gateway', val4: 'Stripe Live'
+    }
+  };
 
   if (consoleTabBtns.length > 0 && consoleTabContents.length > 0) {
     consoleTabBtns.forEach(function (btn) {
@@ -285,13 +324,57 @@
 
         this.classList.add('active');
         const targetId = this.getAttribute('data-tab');
+        activeTabKey = targetId;
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
           targetContent.style.display = 'flex';
         }
+
+        // Update telemetry labels & values for selected project
+        const metrics = tabMetricsMap[targetId];
+        if (metrics) {
+          if (telemetryLabel1) telemetryLabel1.textContent = metrics.label1;
+          if (fpsEl) fpsEl.textContent = metrics.val1;
+
+          if (telemetryLabel2) telemetryLabel2.textContent = metrics.label2;
+          if (latencyEl) latencyEl.textContent = metrics.val2;
+
+          if (telemetryLabel3) telemetryLabel3.textContent = metrics.label3;
+          if (gpsEl) gpsEl.textContent = metrics.val3;
+
+          if (telemetryLabel4) telemetryLabel4.textContent = metrics.label4;
+          if (ramEl) ramEl.textContent = metrics.val4;
+        }
       });
     });
   }
+
+  // --- Live Telemetry Heartbeat Simulation ---
+  setInterval(function () {
+    if (activeTabKey === 'tab-furlink') {
+      if (fpsEl) {
+        const fps = (59.8 + Math.random() * 0.2).toFixed(1);
+        fpsEl.textContent = fps + ' FPS';
+      }
+      if (latencyEl) {
+        const lat = Math.floor(10 + Math.random() * 4);
+        latencyEl.textContent = lat + 'ms';
+      }
+      if (gpsEl) {
+        const dist = (3.2 + Math.random() * 0.9).toFixed(1);
+        gpsEl.textContent = '< ' + dist + 'm Lock';
+      }
+      if (ramEl) {
+        const ram = (37.8 + Math.random() * 1.8).toFixed(1);
+        ramEl.textContent = '< ' + ram + 'MB Peak';
+      }
+    } else if (activeTabKey === 'tab-erp') {
+      if (latencyEl) {
+        const lat = Math.floor(30 + Math.random() * 10);
+        latencyEl.textContent = lat + 'ms';
+      }
+    }
+  }, 2200);
 
   // --- FAQ Accordion Interactive Toggles ---
   const faqQuestions = document.querySelectorAll('.faq-question');
@@ -313,22 +396,6 @@
         }
       });
     });
-  }
-
-  // --- Live Telemetry Simulation (Smooth Subtle Heartbeat) ---
-  const fpsEl = document.getElementById('telemetryFps');
-  const latencyEl = document.getElementById('telemetryLatency');
-  if (fpsEl || latencyEl) {
-    setInterval(function () {
-      if (fpsEl) {
-        const fps = (59.7 + Math.random() * 0.3).toFixed(1);
-        fpsEl.textContent = fps + ' FPS';
-      }
-      if (latencyEl) {
-        const latency = Math.floor(10 + Math.random() * 5);
-        latencyEl.textContent = latency + 'ms';
-      }
-    }, 2400);
   }
 
   // --- Smooth Scroll For All Anchor Links ---
