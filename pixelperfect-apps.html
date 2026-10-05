@@ -3,163 +3,469 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PixelPerfect Apps - Flutter & IoT Development | Building scalable Android, iOS & Web apps. BLE, MQTT, ESP32. By Parth Dattani.">
+  <meta name="description" content="PixelPerfect Apps - Flutter & IoT Development Studio led by Parth Dattani (MCA GTU 9.22 CGPA). 4.5+ years building and deploying 12+ scalable cross-platform apps, BLE, MQTT, and ESP32 hardware integrations.">
+  <meta name="keywords" content="PixelPerfect Apps, Parth Dattani, Flutter Studio, Mobile App Development, IoT Development Studio, BLE, MQTT, ESP32, Android, iOS, Jamnagar, Gujarat, India">
   <meta name="author" content="PixelPerfect Apps">
-  <title>PixelPerfect Apps | Flutter & IoT Solutions</title>
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="PixelPerfect Apps | Flutter &amp; IoT Solutions Studio">
+  <meta property="og:description" content="We build scalable mobile applications and IoT systems for startups and visionary enterprises.">
+  <meta property="og:type" content="website">
+
+  <title>PixelPerfect Apps | Flutter &amp; IoT Solutions Studio</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header anim-header">
+  <!-- Dynamic Background Effects -->
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="ambient-glow-wrapper">
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="ambient-glow ambient-glow-3"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Navigation Bar -->
+  <header class="header" id="header">
     <nav class="nav container">
-      <a href="#" class="logo">PixelPerfect Apps</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#tech">Tech Stack</a></li>
-        <li><a href="#portfolio">Work</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <a href="#hero" class="logo">
+        <span class="logo-badge" style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);">PX</span>
+        <span class="text-gradient">PixelPerfect Apps</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About Us</a></li>
+        <li><a href="#skills" class="nav-link">Expertise</a></li>
+        <li><a href="#projects" class="nav-link">Portfolio</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="index.html" class="nav-link" style="color: #60a5fa;">Parth Dattani ↗</a></li>
       </ul>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary btn-sm">Hire Studio</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <section class="hero" id="hero">
-      <div class="hero-bg"></div>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-glow-1"></div>
+      
       <div class="container hero-content">
-        <p class="hero-badge anim-fade-up" data-delay="0">Flutter & IoT Developer</p>
-        <h1 class="hero-title anim-fade-up" data-delay="100">Building Scalable Apps & IoT Solutions</h1>
-        <p class="hero-sub anim-fade-up" data-delay="200">4+ years of professional experience crafting Android, iOS, and Web applications that scale.</p>
-        <a href="#portfolio" class="btn btn-primary cta anim-fade-up anim-pulse-hover" data-delay="300">View My Work</a>
-      </div>
-    </section>
-
-    <section class="section about" id="about">
-      <div class="container">
-        <h2 class="section-title">About Us</h2>
-        <div class="about-card glass">
-          <p class="about-text">At <strong>PixelPerfect Apps</strong>, we're led by <strong>Parth Dattani</strong>, a Flutter & IoT Developer with over 4 years of experience. We specialize in building cross-platform apps and bridging <strong>hardware and software</strong>—expert in <strong>BLE</strong>, <strong>MQTT</strong>, and <strong>ESP32</strong> integration. From real-time sensor dashboards to production mobile apps, we deliver scalable solutions for Android, iOS, and the Web.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section tech" id="tech">
-      <div class="container">
-        <h2 class="section-title">Tech Stack</h2>
-        <div class="tech-grid">
-          <div class="tech-card glass">Flutter</div>
-          <div class="tech-card glass">Dart</div>
-          <div class="tech-card glass">Firebase</div>
-          <div class="tech-card glass">REST APIs</div>
-          <div class="tech-card glass">Google Maps</div>
-          <div class="tech-card glass">Payment Gateways</div>
-          <div class="tech-card glass">BLE / IoT</div>
-          <div class="tech-card glass">FlutterFlow</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section portfolio" id="portfolio">
-      <div class="container">
-        <h2 class="section-title">Portfolio</h2>
-        <p class="portfolio-sub"><a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener">View all projects on GitHub →</a></p>
-        <div class="portfolio-grid">
-          <article class="project-card glass">
-            <h3>Real-Time BLE Pet Tracker</h3>
-            <p>IoT + Flutter app for tracking pets with BLE beacons and real-time location.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Staff Management & Payroll System</h3>
-            <p>Full-featured HR and payroll management for teams.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Property Tracker App</h3>
-            <p>Property listing and tracking with maps and analytics.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Fitness Life App</h3>
-            <p>Fitbit API integration for activity and health tracking.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Disaster Alert Monitoring</h3>
-            <p>GDACS & USGS API–powered alerts and monitoring dashboard.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>StyleTTS2 Voice Cloning</h3>
-            <p>AI-powered voice cloning and text-to-speech using StyleTTS2.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Book Store App</h3>
-            <p>Flutter e-commerce app for browsing and managing book catalog.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Todo & OTP App</h3>
-            <p>Task management with OTP verification and simple add/edit flows.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>E-Commerce App</h3>
-            <p>Full-featured e-commerce with model bottom sheets and cart flow.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Push Notification</h3>
-            <p>Firebase Cloud Messaging integration for cross-platform notifications.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>BLE + MQTT Tracker</h3>
-            <p>Real-time tracker using Flutter, ESP32, BLE and MQTT connectivity.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>Invoice Generator</h3>
-            <p>Generate and manage invoices with PDF export and professional templates.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>E-Commerce App (Book Store)</h3>
-            <p>Full e-commerce app for book store with catalog, cart, and checkout flow.</p>
-          </article>
-          <article class="project-card glass">
-            <h3>News App</h3>
-            <p>News reader app with categories, API integration, and offline reading.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-wrap">
-          <div class="contact-info glass">
-            <p><strong>Email</strong><br><a href="mailto:dattaniparth2@gmail.com">dattaniparth2@gmail.com</a></p>
-            <p><strong>Phone</strong><br><a href="tel:+919512359792">+91 95123 59792</a></p>
-            <p><strong>GitHub</strong><br><a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener">github.com/Parth-Dattani</a></p>
-            <p><strong>LinkedIn</strong><br><a href="https://www.linkedin.com/in/parth-dattani-1ab69a16a/" target="_blank" rel="noopener">linkedin.com/in/parth-dattani</a></p>
+        <!-- Avatar with Status Indicator -->
+        <div class="hero-avatar-wrapper">
+          <div class="hero-avatar" style="border-color: rgba(6, 182, 212, 0.4);">
+            <div class="hero-avatar-inner" style="background: radial-gradient(circle at center, #0e7490 0%, #0f172a 80%);">
+              <span class="hero-avatar-initials" style="background: linear-gradient(135deg, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">PX</span>
+            </div>
           </div>
-          <form class="contact-form glass" id="contactForm" action="https://formsubmit.co/dattaniparth2@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="PixelPerfect Apps: New inquiry">
-            <input type="hidden" name="_next" value="">
+          <div class="status-indicator" title="Accepting New Projects"></div>
+        </div>
+
+        <div class="hero-badge-pill" style="border-color: rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.12); color: #22d3ee;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          Elite Flutter &amp; IoT Solutions Studio
+        </div>
+
+        <h1 class="hero-title text-gradient">
+          Building Scalable Apps &amp; IoT Solutions
+        </h1>
+
+        <div class="hero-tagline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>Crafting production-ready cross-platform mobile apps &amp; hardware telemetry</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+
+        <div class="hero-skills-row">
+          <span class="skill-tag">Flutter Cross-Platform</span>
+          <span class="skill-tag">BLE / ESP32 Hardware</span>
+          <span class="skill-tag">MQTT IoT Cloud</span>
+          <span class="skill-tag">GetX &amp; Clean Architecture</span>
+          <span class="skill-tag">ERP &amp; Invoicing</span>
+          <span class="skill-tag">Firebase &amp; REST APIs</span>
+        </div>
+
+        <p class="hero-desc">
+          At <strong>PixelPerfect Apps</strong>, we are led by <strong>Parth Dattani (MCA GTU, 9.22 CGPA)</strong> with <strong>4.5+ years of professional engineering experience</strong>. We specialize in building high-throughput mobile apps and reliable IoT systems connecting hardware to cloud.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            View Portfolio
+          </a>
+          <button class="btn btn-outline" id="resumeBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+            Download Profile / Resume
+          </button>
+          <a href="#contact" class="btn btn-success" id="openDiscoveryBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            Discuss Your App Idea
+          </a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/parth-dattani-1ab69a16a/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="mailto:dattaniparth2@gmail.com" class="social-icon-btn" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          </a>
+          <a href="tel:+919512359792" class="social-icon-btn" aria-label="Phone">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section section-alt" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title text-gradient">About PixelPerfect Apps</h2>
+          <p class="section-subtitle">Dedicated to creating robust, high-performance applications with precision craftsmanship</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-bio-card glass-panel">
+            <p class="about-text">
+              <strong>PixelPerfect Apps</strong> delivers end-to-end mobile development and hardware integration services. Founded by <strong>Parth Dattani</strong> (MCA GTU, CGPA: 9.22/10), our engineering approach combines clean architectural principles (<strong>GetX, Clean Architecture &amp; MVVM</strong>) with high-speed real-time communication protocols.
+            </p>
+            <p class="about-text">
+              We specialize in custom <strong>BLE (Bluetooth Low Energy) firmware communication, MQTT broker integration, and ESP32 hardware telemetry</strong> alongside seamless cross-platform mobile apps for Android, iOS, and Web.
+            </p>
+
+            <div class="about-info-list">
+              <div class="about-info-item">
+                <div class="about-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <span><strong>Location:</strong> Jamnagar, Gujarat, India</span>
+              </div>
+              <div class="about-info-item">
+                <div class="about-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <span><strong>Direct Line:</strong> +91 95123 59792</span>
+              </div>
+              <div class="about-info-item">
+                <div class="about-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                </div>
+                <span><strong>Business Email:</strong> dattaniparth2@gmail.com</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Gradient Stat Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-card-1">
+              <div class="stat-number">4.5+</div>
+              <div class="stat-label">Years of Excellence</div>
+            </div>
+            <div class="stat-card stat-card-2">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">Production Apps Published</div>
+            </div>
+            <div class="stat-card stat-card-3">
+              <div class="stat-number">9.22</div>
+              <div class="stat-label">Lead MCA CGPA</div>
+            </div>
+            <div class="stat-card stat-card-4">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title text-gradient">Studio Expertise &amp; Stack</h2>
+          <p class="section-subtitle">Full-spectrum capabilities from embedded firmware to cloud-connected mobile apps</p>
+        </div>
+
+        <div class="skills-grid-main">
+          <!-- Languages -->
+          <div class="skill-category-card">
+            <div class="category-header">
+              <div class="category-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <h3 class="category-title">Mobile &amp; Frameworks</h3>
+            </div>
+            <div class="skill-badges-wrap">
+              <span class="skill-badge badge-blue">Flutter &amp; Dart</span>
+              <span class="skill-badge badge-purple">Flutter Web</span>
+              <span class="skill-badge badge-amber">Dio Integration</span>
+              <span class="skill-badge badge-pink">Android SDK</span>
+              <span class="skill-badge badge-cyan">iOS Native</span>
+            </div>
+          </div>
+
+          <!-- Architecture & State -->
+          <div class="skill-category-card">
+            <div class="category-header">
+              <div class="category-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              </div>
+              <h3 class="category-title">Architecture &amp; State</h3>
+            </div>
+            <div class="skill-badges-wrap">
+              <span class="skill-badge badge-amber">GetX State Management</span>
+              <span class="skill-badge badge-purple">Clean Architecture</span>
+              <span class="skill-badge badge-blue">MVVM</span>
+              <span class="skill-badge badge-green">BLoC &amp; Provider</span>
+            </div>
+          </div>
+
+          <!-- IoT, Hardware & Protocols -->
+          <div class="skill-category-card">
+            <div class="category-header">
+              <div class="category-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"></path><path d="m17 5-5-3-5 3"></path><path d="m17 19-5 3-5-3"></path><path d="M2 12h20"></path></svg>
+              </div>
+              <h3 class="category-title">IoT &amp; Hardware</h3>
+            </div>
+            <div class="skill-badges-wrap">
+              <span class="skill-badge badge-blue">BLE GATT Protocols</span>
+              <span class="skill-badge badge-purple">MQTT Protocol</span>
+              <span class="skill-badge badge-green">ESP32 Firmware</span>
+              <span class="skill-badge badge-cyan">GPS Geofencing</span>
+            </div>
+          </div>
+
+          <!-- Cloud & Enterprise -->
+          <div class="skill-category-card">
+            <div class="category-header">
+              <div class="category-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+              </div>
+              <h3 class="category-title">Cloud &amp; Enterprise</h3>
+            </div>
+            <div class="skill-badges-wrap">
+              <span class="skill-badge badge-amber">Firebase Suite</span>
+              <span class="skill-badge badge-green">Stripe Payments</span>
+              <span class="skill-badge badge-blue">MySQL Real-Time</span>
+              <span class="skill-badge badge-pink">ERP &amp; Invoicing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title text-gradient">Featured Work</h2>
+          <p class="section-subtitle">Showcase of production mobile applications and IoT systems</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="projects-filter-bar">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="iot">IoT &amp; Hardware</button>
+          <button class="filter-btn" data-filter="enterprise">ERP &amp; Enterprise</button>
+          <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Furlink IoT Pet Tracker -->
+          <div class="project-card" data-category="iot mobile">
+            <div class="project-thumb project-thumb-1">
+              <div class="project-thumb-badge">IoT + Hardware</div>
+              <div class="project-thumb-title">Furlink IoT Pet Tracker</div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">Furlink IoT Pet Tracker</h3>
+              <p class="project-summary">
+                End-to-end IoT mobile application connecting ESP32 hardware via BLE and MQTT protocols, featuring sub-5-meter GPS geofencing, battery diagnostics, and power-saving polling algorithms that reduced device battery drain by 35%.
+              </p>
+              <div class="project-tags">
+                <span class="skill-badge badge-blue">Flutter</span>
+                <span class="skill-badge badge-purple">ESP32 Hardware</span>
+                <span class="skill-badge badge-green">BLE &amp; MQTT</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener noreferrer" class="project-btn">Source Code</a>
+                <a href="#contact" class="project-btn">Inquire</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Online Store & Wholesale ERP -->
+          <div class="project-card" data-category="enterprise mobile">
+            <div class="project-thumb project-thumb-2">
+              <div class="project-thumb-badge">ERP System</div>
+              <div class="project-thumb-title">Online Store &amp; Wholesale ERP</div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">Online Store &amp; Wholesale ERP</h3>
+              <p class="project-summary">
+                Architected an enterprise-grade ERP solution handling 20+ operational modules (inventory, sales/purchase invoicing, dispatch, and live delivery tracking) with 35+ responsive Flutter screens and real-time MySQL database synchronization.
+              </p>
+              <div class="project-tags">
+                <span class="skill-badge badge-blue">Flutter</span>
+                <span class="skill-badge badge-purple">20+ Modules</span>
+                <span class="skill-badge badge-green">MySQL Sync</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener noreferrer" class="project-btn">GitHub</a>
+                <a href="#contact" class="project-btn">Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Invoice Sathi Automated Billing -->
+          <div class="project-card" data-category="enterprise mobile">
+            <div class="project-thumb project-thumb-3">
+              <div class="project-thumb-badge">GST Billing</div>
+              <div class="project-thumb-title">Invoice Sathi Billing</div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-name">Invoice Sathi Automated Billing</h3>
+              <p class="project-summary">
+                Developed a cloud-integrated GST billing platform with Google Sheets API sync and dynamic tax calculation, generating automated PDF invoices and cutting checkout billing turnaround time by 40%.
+              </p>
+              <div class="project-tags">
+                <span class="skill-badge badge-blue">Flutter</span>
+                <span class="skill-badge badge-amber">Google Sheets API</span>
+                <span class="skill-badge badge-pink">PDF Generation</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Parth-Dattani" target="_blank" rel="noopener noreferrer" class="project-btn">GitHub</a>
+                <a href="#contact" class="project-btn">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title text-gradient">Track Record &amp; Experience</h2>
+          <p class="section-subtitle">Proven history delivering complex cross-platform and hardware integrated software</p>
+        </div>
+
+        <div class="timeline-wrap">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-role">Flutter / WordPress Developer (Contract)</h3>
+                <div class="timeline-company">Inteligent Tech</div>
+              </div>
+              <span class="timeline-badge">Aug 2025 – Present</span>
+            </div>
+            <ul class="timeline-duties">
+              <li>Architected enterprise ERP solutions handling 20+ operational modules with 35+ Flutter screens and real-time MySQL synchronization.</li>
+              <li>Developed automated GST billing platforms with Google Sheets API sync and instant PDF invoices.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-role">Flutter Developer (Contract)</h3>
+                <div class="timeline-company">Globe Max Web Solutions</div>
+              </div>
+              <span class="timeline-badge">Dec 2025 – Apr 2026</span>
+            </div>
+            <ul class="timeline-duties">
+              <li>Engineered interactive 3D disaster monitoring platforms with Stripe payment integration and financial mortgage analytics tools.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-alt" id="contact">
+      <div class="container contact-container">
+        <div class="contact-card">
+          <div class="contact-intro">
+            <h2 class="section-title text-gradient">Start Your Project with Us</h2>
+            <p class="contact-lead">
+              Tell us about your mobile app or IoT requirements. We build scalable, fast, and reliable software.
+            </p>
+          </div>
+
+          <form class="contact-form" id="contactForm" action="https://formsubmit.co/dattaniparth2@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Inquiry - PixelPerfect Apps">
             <input type="hidden" name="_captcha" value="false">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required placeholder="Your name">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="your@email.com">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required placeholder="Your inquiry..."></textarea>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="userName">Contact Name</label>
+                <input class="form-input" type="text" id="userName" name="name" required placeholder="e.g. Alex Smith">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="userEmail">Business Email</label>
+                <input class="form-input" type="email" id="userEmail" name="email" required placeholder="e.g. alex@company.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="userMessage">Project Details</label>
+              <textarea class="form-textarea" id="userMessage" name="message" required placeholder="Briefly describe your app idea, platform requirements, and target timeline..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; font-size: 1rem;">
+              Send Inquiry
+            </button>
           </form>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> PixelPerfect Apps · <a href="index.html">Parth Dattani</a>. All rights reserved.</p>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="text-gradient">PixelPerfect Apps</span>
+          <span style="color: var(--text-muted); font-size: 0.9rem; margin-left: 0.5rem;">· Led by <a href="index.html" style="color: #60a5fa;">Parth Dattani</a></span>
+        </div>
+        
+        <div class="footer-copy">
+          &copy; <span id="year"></span> PixelPerfect Apps. All rights reserved.
+        </div>
+
+        <a href="#hero" class="back-to-top" aria-label="Back to Top">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </a>
+      </div>
     </div>
   </footer>
+
+  <!-- Toast Notice -->
+  <div class="toast-notice" id="toastNotice">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span>Thank you! Your message has been sent successfully.</span>
+  </div>
 
   <script src="script.js"></script>
 </body>
