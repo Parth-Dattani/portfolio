@@ -1603,14 +1603,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- Netlify Injected Badge Override --- */
-[class*="netlify-badge"],
-[id*="netlify-badge"],
+[class*="netlify"],
+[id*="netlify"],
 .netlify-badge,
-[data-netlify-drawer] {
+[data-netlify-drawer],
+netlify-drawer,
+div:has(> a[href*="netlify.com"]) {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
+  z-index: -9999 !important;
 }
 
 @media (max-width: 480px) {
