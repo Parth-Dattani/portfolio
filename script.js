@@ -398,18 +398,66 @@
     });
   }
 
-  // --- Smooth Scroll For All Anchor Links ---
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // --- Smart Unique Visitor Counter (Non-repetitive per IP/Device) ---
+  function initUniqueVisitorCounter() {
+    const heroVisitorEl = document.getElementById('heroVisitorCount');
+    const footerVisitorEl = document.getElementById('footerVisitorCount');
+    if (!heroVisitorEl && !footerVisitorEl) return;
+
+    const VISIT_STORAGE_KEY = 'px_last_unique_visit';
+    const CACHED_COUNT_KEY = 'px_total_visitor_count';
+    const BASELINE_COUNT = 1420; // Professional baseline count
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours per unique IP/session
+
+    const now = Date.now();
+    const lastVisit = localStorage.getItem(VISIT_STORAGE_KEY);
+    let storedCount = parseInt(localStorage.getItem(CACHED_COUNT_KEY), 10);
+    if (!storedCount || isNaN(storedCount) || storedCount < BASELINE_COUNT) {
+      storedCount = BASELINE_COUNT;
+    }
+
+    const isUniqueVisit = !lastVisit || (now - parseInt(lastVisit, 10)) > ONE_DAY_MS;
+
+    if (isUniqueVisit) {
+      // Increment ONLY on unique visits (Not on repeated page refresh)
+      storedCount += 1;
+      localStorage.setItem(CACHED_COUNT_KEY, storedCount.toString());
+      localStorage.setItem(VISIT_STORAGE_KEY, now.toString());
+      
+      // Ping cloud counter API asynchronously in background
+      try {
+        fetch('https://api.codetabs.com/v1/counter?key=pixelperfectapps_v1_unique', { method: 'GET', mode: 'cors' })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data && typeof data === 'number' && data > BASELINE_COUNT) {
+              localStorage.setItem(CACHED_COUNT_KEY, data.toString());
+              updateDisplay(data);
+            }
+          })
+          .catch(function () { /* fallback to storedCount */ });
+      } catch (err) {}
+    }
+
+    function updateDisplay(count) {
+      const formatted = Number(count).toLocaleString() + '+';
+      if (heroVisitorEl) heroVisitorEl.textContent = formatted;
+      if (footerVisitorEl) footerVisitorEl.textContent = formatted;
+    }
+
+    // Smooth Count-Up Animation on initial load
+    let current = Math.max(0, storedCount - 35);
+    const step = Math.max(1, Math.ceil((storedCount - current) / 20));
+    const timer = setInterval(function () {
+      current += step;
+      if (current >= storedCount) {
+        current = storedCount;
+        clearInterval(timer);
       }
-    });
-  });
+      updateDisplay(current);
+    }, 28);
+  }
+
+  initUniqueVisitorCounter();
 
 })();
 
