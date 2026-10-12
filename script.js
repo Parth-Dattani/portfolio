@@ -455,13 +455,14 @@
 
   // --- Smart Unique Visitor Counter (Non-repetitive per IP/Device) ---
   function initUniqueVisitorCounter() {
-    const heroVisitorEl = document.getElementById('heroVisitorCount');
-    const footerVisitorEl = document.getElementById('footerVisitorCount');
-    if (!heroVisitorEl && !footerVisitorEl) return;
+    const allVisitorEls = document.querySelectorAll('.visitor-count-val, #heroVisitorCount, #footerVisitorCount');
+    if (!allVisitorEls.length) return;
 
-    const VISIT_STORAGE_KEY = 'px_last_unique_visit';
-    const CACHED_COUNT_KEY = 'px_total_visitor_count';
-    const BASELINE_COUNT = 1420; // Professional baseline count
+    const isPixel = window.location.pathname.includes('pixelperfect') || document.title.includes('PixelPerfect');
+    const storagePrefix = isPixel ? 'px_' : 'pd_';
+    const VISIT_STORAGE_KEY = storagePrefix + 'last_unique_visit';
+    const CACHED_COUNT_KEY = storagePrefix + 'total_visitor_count';
+    const BASELINE_COUNT = isPixel ? 1420 : 1680;
     const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours per unique IP/session
 
     const now = Date.now();
@@ -479,9 +480,9 @@
       localStorage.setItem(CACHED_COUNT_KEY, storedCount.toString());
       localStorage.setItem(VISIT_STORAGE_KEY, now.toString());
       
-      // Ping cloud counter API asynchronously in background
+      const apiKey = isPixel ? 'pixelperfectapps_v1_unique' : 'parthdattani_portfolio_v1_unique';
       try {
-        fetch('https://api.codetabs.com/v1/counter?key=pixelperfectapps_v1_unique', { method: 'GET', mode: 'cors' })
+        fetch('https://api.codetabs.com/v1/counter?key=' + apiKey, { method: 'GET', mode: 'cors' })
           .then(function (res) { return res.json(); })
           .then(function (data) {
             if (data && typeof data === 'number' && data > BASELINE_COUNT) {
@@ -495,8 +496,9 @@
 
     function updateDisplay(count) {
       const formatted = Number(count).toLocaleString() + '+';
-      if (heroVisitorEl) heroVisitorEl.textContent = formatted;
-      if (footerVisitorEl) footerVisitorEl.textContent = formatted;
+      allVisitorEls.forEach(function (el) {
+        el.textContent = formatted;
+      });
     }
 
     // Smooth Count-Up Animation on initial load
