@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Parth Dattani Personal Portfolio -->
+  <url>
+    <loc>https://parth-dattani.github.io/portfolio/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://parth-dattani.github.io/portfolio/images/parth-dattani.jpg</image:loc>
+      <image:title>Parth Dattani - Flutter Developer and Mobile Application Engineer</image:title>
+    </image:image>
+  </url>
+
+  <!-- PixelPerfect Apps Agency & Studio Platform -->
+  <url>
+    <loc>https://pixelperfectapps.netlify.app/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://pixelperfectapps.netlify.app/images/pixelperfect-banner.png</image:loc>
+      <image:title>PixelPerfect Apps - Mobile App and IoT Engineering Studio</image:title>
+    </image:image>
+  </url>
+
+</urlset>
