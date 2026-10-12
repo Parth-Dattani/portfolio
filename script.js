@@ -458,15 +458,17 @@
     const allVisitorEls = document.querySelectorAll('.visitor-count-val, #heroVisitorCount, #footerVisitorCount');
     if (!allVisitorEls.length) return;
 
-    const isPixel = window.location.pathname.includes('pixelperfect') || document.title.includes('PixelPerfect');
-    const storagePrefix = isPixel ? 'px_' : 'pd_';
-    const VISIT_STORAGE_KEY = storagePrefix + 'lifetime_visit_logged';
-    const CACHED_COUNT_KEY = storagePrefix + 'total_visitor_count';
-    const BASELINE_COUNT = isPixel ? 1420 : 1680;
+    // Unified shared storage and cloud counter across both Parth Dattani & PixelPerfect Apps
+    const VISIT_STORAGE_KEY = 'pixelperfect_lifetime_visit_logged';
+    const CACHED_COUNT_KEY = 'pixelperfect_total_visitor_count';
+    const BASELINE_COUNT = 1422; // Unified synchronized baseline
 
     // Check lifetime visitor status (Never expires - count increments ONLY ONCE per device/browser lifetime)
     const hasVisitedLifetime = localStorage.getItem(VISIT_STORAGE_KEY) === 'true' ||
-                               Boolean(localStorage.getItem(storagePrefix + 'last_unique_visit'));
+                               Boolean(localStorage.getItem('px_last_unique_visit')) ||
+                               Boolean(localStorage.getItem('pd_last_unique_visit')) ||
+                               Boolean(localStorage.getItem('px_lifetime_visit_logged')) ||
+                               Boolean(localStorage.getItem('pd_lifetime_visit_logged'));
 
     let storedCount = parseInt(localStorage.getItem(CACHED_COUNT_KEY), 10);
     if (!storedCount || isNaN(storedCount) || storedCount < BASELINE_COUNT) {
@@ -479,7 +481,7 @@
       localStorage.setItem(CACHED_COUNT_KEY, storedCount.toString());
       localStorage.setItem(VISIT_STORAGE_KEY, 'true');
       
-      const apiKey = isPixel ? 'pixelperfectapps_v1_unique' : 'parthdattani_portfolio_v1_unique';
+      const apiKey = 'pixelperfectapps_v1_unique';
       try {
         fetch('https://api.codetabs.com/v1/counter?key=' + apiKey, { method: 'GET', mode: 'cors' })
           .then(function (res) { return res.json(); })
