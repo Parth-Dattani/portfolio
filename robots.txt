@@ -1,0 +1,7 @@
+# Robots.txt for Parth Dattani Portfolio & PixelPerfect Apps
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://parth-dattani.github.io/portfolio/sitemap.xml
+Sitemap: https://pixelperfectapps.netlify.app/sitemap.xml
