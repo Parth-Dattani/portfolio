@@ -512,7 +512,171 @@
     }, 28);
   }
 
+  // --- Creative Stuff Studio Inspired Interactive Animations ---
+
+  // 1. Hero Dynamic Typing & Rotating Word Loop
+  function initHeroTypingAnimation() {
+    const typingEls = document.querySelectorAll('.typing-word');
+    if (!typingEls.length) return;
+
+    typingEls.forEach(function (typingEl) {
+      const wordsAttr = typingEl.getAttribute('data-words');
+      if (!wordsAttr) return;
+      
+      let words = [];
+      try {
+        words = JSON.parse(wordsAttr);
+      } catch (e) {
+        words = ['Scalable', 'High-Performance', 'Pixel-Perfect'];
+      }
+      if (!words.length) return;
+
+      let wordIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+      const typeSpeed = 90;
+      const deleteSpeed = 45;
+      const pauseTime = 2200;
+
+      function typeLoop() {
+        const currentWord = words[wordIdx];
+        if (isDeleting) {
+          typingEl.textContent = currentWord.substring(0, charIdx - 1);
+          charIdx--;
+        } else {
+          typingEl.textContent = currentWord.substring(0, charIdx + 1);
+          charIdx++;
+        }
+
+        let timeout = isDeleting ? deleteSpeed : typeSpeed;
+
+        if (!isDeleting && charIdx === currentWord.length) {
+          timeout = pauseTime;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          wordIdx = (wordIdx + 1) % words.length;
+          timeout = 380;
+        }
+
+        setTimeout(typeLoop, timeout);
+      }
+
+      typeLoop();
+    });
+  }
+
+  // 2. Reading Progress Bar at Browser Top
+  function initReadingProgressBar() {
+    const progressBar = document.getElementById('readingProgressBar');
+    if (!progressBar) return;
+
+    function updateProgress() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      progressBar.style.width = scrolled + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // 3. Floating Scroll-To-Top Button
+  function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) return;
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 220) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    scrollToTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // 4. Animate On Scroll (AOS) Entry Observer
+  function initScrollEntryAnimations() {
+    const animEls = document.querySelectorAll('.anim-fade-up, .anim-fade-down, .anim-slide-left, .anim-slide-right, .anim-zoom-in');
+    if (!animEls.length || !('IntersectionObserver' in window)) return;
+
+    const animObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('anim-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    animEls.forEach(function (el) {
+      animObserver.observe(el);
+    });
+  }
+
+  // 5. Counting Numbers Animation (Creativestuffstudio Counter Style)
+  function initCounterRolls() {
+    const counterEls = document.querySelectorAll('[data-counter-end]');
+    if (!counterEls.length || !('IntersectionObserver' in window)) return;
+
+    const counterObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const endVal = parseFloat(el.getAttribute('data-counter-end')) || 0;
+          const decimals = parseInt(el.getAttribute('data-counter-decimals') || '0', 10);
+          const prefix = el.getAttribute('data-counter-prefix') || '';
+          const suffix = el.getAttribute('data-counter-suffix') || '';
+          const duration = parseInt(el.getAttribute('data-counter-duration') || '1800', 10);
+
+          let startTime = null;
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            // Ease out cubic
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const currentVal = (ease * endVal).toFixed(decimals);
+
+            let formatted = currentVal;
+            if (decimals === 0 && endVal >= 1000) {
+              formatted = parseInt(currentVal, 10).toLocaleString();
+            }
+
+            el.textContent = prefix + formatted + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = prefix + (decimals === 0 && endVal >= 1000 ? parseInt(endVal, 10).toLocaleString() : endVal.toFixed(decimals)) + suffix;
+            }
+          }
+
+          requestAnimationFrame(step);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    counterEls.forEach(function (el) {
+      counterObserver.observe(el);
+    });
+  }
+
+  // Initialize all dynamic animation systems
   initUniqueVisitorCounter();
+  initHeroTypingAnimation();
+  initReadingProgressBar();
+  initScrollToTop();
+  initScrollEntryAnimations();
+  initCounterRolls();
 
 })();
 
