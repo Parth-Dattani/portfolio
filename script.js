@@ -460,25 +460,24 @@
 
     const isPixel = window.location.pathname.includes('pixelperfect') || document.title.includes('PixelPerfect');
     const storagePrefix = isPixel ? 'px_' : 'pd_';
-    const VISIT_STORAGE_KEY = storagePrefix + 'last_unique_visit';
+    const VISIT_STORAGE_KEY = storagePrefix + 'lifetime_visit_logged';
     const CACHED_COUNT_KEY = storagePrefix + 'total_visitor_count';
     const BASELINE_COUNT = isPixel ? 1420 : 1680;
-    const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 24 hours per unique IP/session
 
-    const now = Date.now();
-    const lastVisit = localStorage.getItem(VISIT_STORAGE_KEY);
+    // Check lifetime visitor status (Never expires - count increments ONLY ONCE per device/browser lifetime)
+    const hasVisitedLifetime = localStorage.getItem(VISIT_STORAGE_KEY) === 'true' ||
+                               Boolean(localStorage.getItem(storagePrefix + 'last_unique_visit'));
+
     let storedCount = parseInt(localStorage.getItem(CACHED_COUNT_KEY), 10);
     if (!storedCount || isNaN(storedCount) || storedCount < BASELINE_COUNT) {
       storedCount = BASELINE_COUNT;
     }
 
-    const isUniqueVisit = !lastVisit || (now - parseInt(lastVisit, 10)) > ONE_DAY_MS;
-
-    if (isUniqueVisit) {
-      // Increment ONLY on unique visits (Not on repeated page refresh)
+    if (!hasVisitedLifetime) {
+      // First time EVER on this device/browser -> increment once for lifetime
       storedCount += 1;
       localStorage.setItem(CACHED_COUNT_KEY, storedCount.toString());
-      localStorage.setItem(VISIT_STORAGE_KEY, now.toString());
+      localStorage.setItem(VISIT_STORAGE_KEY, 'true');
       
       const apiKey = isPixel ? 'pixelperfectapps_v1_unique' : 'parthdattani_portfolio_v1_unique';
       try {
