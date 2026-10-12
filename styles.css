@@ -2706,4 +2706,166 @@ div:has(> a[href*="netlify.com"]) {
   z-index: -9999 !important;
 }
 
+/* --- Creative Stuff Studio Inspired Dynamic Animations --- */
+
+/* 1. Top Reading Progress Bar */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 35%, #ec4899 70%, #10b981 100%);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.7), 0 0 20px rgba(236, 72, 153, 0.5);
+  z-index: 10000;
+  transition: width 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* 2. Hero Typing / Rotating Word Effect */
+.typing-wrapper {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.typing-word {
+  background: linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  display: inline-block;
+  min-width: 1ch;
+  transition: opacity 0.2s ease;
+}
+
+.typing-cursor {
+  display: inline-block;
+  font-weight: 300;
+  color: #38bdf8;
+  margin-left: 2px;
+  animation: blinkCursor 0.85s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 3. Floating Scroll-To-Top Button */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(59, 130, 246, 0.45);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.85);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(59, 130, 246, 0.25);
+}
+
+.scroll-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-to-top-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  border-color: #60a5fa;
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.5), 0 0 25px rgba(124, 58, 237, 0.4);
+}
+
+/* 4. Creative Stuff Studio Scroll Entry Animations (AOS) */
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.anim-fade-down {
+  opacity: 0;
+  transform: translateY(-35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.anim-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.anim-zoom-in {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.anim-in {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Staggered Delay Utilities */
+[data-delay="100"] { transition-delay: 0.1s !important; }
+[data-delay="200"] { transition-delay: 0.2s !important; }
+[data-delay="300"] { transition-delay: 0.3s !important; }
+[data-delay="400"] { transition-delay: 0.4s !important; }
+[data-delay="500"] { transition-delay: 0.5s !important; }
+[data-delay="600"] { transition-delay: 0.6s !important; }
+
+/* 5. Glowing Micro-Animations */
+@keyframes buttonPulseGlow {
+  0%, 100% {
+    box-shadow: 0 4px 15px var(--primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.7), 0 0 40px rgba(139, 92, 246, 0.4);
+  }
+}
+
+.btn-primary {
+  animation: buttonPulseGlow 3.5s infinite ease-in-out;
+}
+
+@keyframes rubberBandAnim {
+  0% { transform: scale(1); }
+  30% { transform: scaleX(1.15) scaleY(0.85); }
+  40% { transform: scaleX(0.85) scaleY(1.15); }
+  50% { transform: scaleX(1.08) scaleY(0.92); }
+  65% { transform: scaleX(0.96) scaleY(1.04); }
+  75% { transform: scaleX(1.03) scaleY(0.97); }
+  100% { transform: scale(1); }
+}
+
+.hero-badge-pill:hover,
+.project-thumb-badge:hover,
+.filter-btn.active {
+  animation: rubberBandAnim 0.75s ease;
+}
+
 
