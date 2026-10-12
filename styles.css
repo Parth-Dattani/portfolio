@@ -1030,6 +1030,52 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 14px var(--primary-glow);
 }
 
+/* --- Projects View All / Show Less Toggle --- */
+.projects-view-more-wrap {
+  text-align: center;
+  margin-top: 3.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2.4rem;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(59, 130, 246, 0.4);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.6), 0 0 20px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.view-all-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  border-color: #60a5fa;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45), 0 0 25px rgba(124, 58, 237, 0.35);
+}
+
+.view-all-btn:active {
+  transform: translateY(-1px);
+}
+
+.view-all-btn .btn-icon {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.view-all-btn.expanded .btn-icon {
+  transform: rotate(180deg);
+}
+
 /* --- Case Studies Section (Dalsukh reference inspired) --- */
 .case-studies-wrap {
   display: flex;

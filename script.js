@@ -210,37 +210,92 @@
     });
   }
 
-  // --- Projects Category Filter ---
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  // --- Projects Category Filter & 6-Item Initial Limit with "View All" Toggle ---
+  const projectsSection = document.getElementById('projects');
+  if (projectsSection) {
+    const filterBtns = projectsSection.querySelectorAll('.filter-btn');
+    const projectCards = Array.from(projectsSection.querySelectorAll('.project-card'));
+    const viewAllBtn = projectsSection.querySelector('#viewAllProjectsBtn') || document.getElementById('viewAllProjectsBtn');
+    const btnText = viewAllBtn ? viewAllBtn.querySelector('.btn-text') : null;
 
-  if (filterBtns.length > 0 && projectCards.length > 0) {
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        filterBtns.forEach(function (b) { b.classList.remove('active'); });
-        this.classList.add('active');
+    const INITIAL_LIMIT = 6;
+    let isExpanded = false;
+    let currentFilter = 'all';
 
-        const filterVal = this.getAttribute('data-filter');
+    function renderProjects() {
+      // Find cards matching current category filter
+      const matchingCards = projectCards.filter(function (card) {
+        const cat = card.getAttribute('data-category') || '';
+        return currentFilter === 'all' || cat.includes(currentFilter);
+      });
 
-        projectCards.forEach(function (card) {
-          const cardCategory = card.getAttribute('data-category') || '';
-          
-          if (filterVal === 'all' || cardCategory.includes(filterVal)) {
-            card.style.display = 'flex';
-            setTimeout(function () {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, 50);
+      const totalMatching = matchingCards.length;
+
+      // Hide cards that don't match the active filter
+      projectCards.forEach(function (card) {
+        if (!matchingCards.includes(card)) {
+          card.style.display = 'none';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+        }
+      });
+
+      // Show cards up to INITIAL_LIMIT (or all if expanded)
+      matchingCards.forEach(function (card, index) {
+        if (isExpanded || index < INITIAL_LIMIT) {
+          card.style.display = 'flex';
+          setTimeout(function () {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 30);
+        } else {
+          card.style.display = 'none';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+        }
+      });
+
+      // Update View All button visibility & text
+      if (viewAllBtn && btnText) {
+        const wrap = viewAllBtn.closest('.projects-view-more-wrap') || viewAllBtn.parentElement;
+        if (totalMatching <= INITIAL_LIMIT) {
+          if (wrap) wrap.style.display = 'none';
+        } else {
+          if (wrap) wrap.style.display = 'block';
+          if (isExpanded) {
+            viewAllBtn.classList.add('expanded');
+            btnText.textContent = 'Show Less';
           } else {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(15px)';
-            setTimeout(function () {
-              card.style.display = 'none';
-            }, 250);
+            viewAllBtn.classList.remove('expanded');
+            btnText.textContent = 'View All Projects (' + totalMatching + ')';
           }
+        }
+      }
+    }
+
+    if (viewAllBtn) {
+      viewAllBtn.addEventListener('click', function () {
+        isExpanded = !isExpanded;
+        renderProjects();
+        if (!isExpanded) {
+          projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    if (filterBtns.length > 0) {
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          currentFilter = this.getAttribute('data-filter') || 'all';
+          renderProjects();
         });
       });
-    });
+    }
+
+    // Initial render
+    renderProjects();
   }
 
   // --- Toast Notification Helper ---
